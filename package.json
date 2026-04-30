@@ -1,6 +1,9 @@
 {
   "name": "all-in-one",
   "type": "module",
+  "version": "0.0.1",
+  "main": "dist/src/server.js",
+  "module": "src/server.ts",
   "private": true,
   "scripts": {
     "dev": "node --watch --enable-source-maps dist/server.js",
