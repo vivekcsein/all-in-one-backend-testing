@@ -3,7 +3,6 @@
   "builds": [
     {
       "src": "/src/server.ts",
-      "dest": "dist/src/server.js",
       "compiler": "tsc",
       "use": "@vercel/node",
       "config": { "includeFiles": ["dist/**"] }
