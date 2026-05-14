@@ -12,7 +12,7 @@
     "rootDir": "./",
     "outDir": "./dist",
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
 
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
