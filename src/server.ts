@@ -1,4 +1,4 @@
-import createApp from "./app";
+import createApp from "./app.js";
 
 // ✅ Start server with safe async handling
 const startServer = async (): Promise<void> => {
