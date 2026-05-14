@@ -3,6 +3,7 @@
     "target": "es2025",
     "module": "preserve",
     "moduleResolution": "bundler",
+    "lib": ["es2021"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
@@ -17,5 +18,5 @@
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["api", "src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules","dist"]
 }

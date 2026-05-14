@@ -1,4 +1,9 @@
-import express, { type Request, type Response } from "express";
+import express from "express";
+
+import type {
+  Request,
+  Response,
+} from "express";
 
 const createApp = async (): Promise<express.Express> => {
   const app = express();
