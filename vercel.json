@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "build": "pnpm run build",
+      "src": "dist/index.js",
+      "use": "@vercel/node",
+      "config": { "includeFiles": ["dist/**"] }
+    }
+  ],
   "routes": [
     {
       "src": "/(.*)",
