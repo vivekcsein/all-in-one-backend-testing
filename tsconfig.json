@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2025",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "lib": ["es2021"],
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "lib": ["es2025"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
@@ -15,6 +15,7 @@
     "outDir": "./dist",
     "rootDir": "./",
     "types": ["node","express"],
+    "verbatimModuleSyntax": false,
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["api", "src/**/*.ts"],
