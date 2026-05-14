@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-
     "target": "ES2022",
     "lib": ["ES2022"],
 
@@ -29,17 +28,11 @@
     "noUnusedParameters": true,
 
     "skipLibCheck": true,
-    
+
     "types": ["node", "express"]
   },
 
-  "include": [
-    "src/**/*.ts",
-    "api/**/*.ts"
-  ],
+  "include": ["src/**/*.ts", "api/**/*.ts"],
 
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "exclude": ["node_modules", "dist"]
 }
