@@ -6,7 +6,7 @@ const createApp = async (): Promise<express.Express> => {
 
   // 🛣️ Routes
   app.get(["/", "/index", "/index.html"], (_req: Request, res: Response) => {
-    res.send({
+    res.status(200).json({
       success: true,
       message: "Hello World!",
       timestamp: new Date().toISOString(),
