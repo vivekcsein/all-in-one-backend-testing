@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "testing out an all-in-one backend setup with express and vercel",
   "type": "module",
-  "entry": "./dist/api/index.js",
-  "main": "./dist/api/index.js",
+  "entry": "api/index.js",
+  "main": "api/index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json && tsc-esm-fix --target='dist'",
