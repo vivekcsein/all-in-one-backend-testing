@@ -1,4 +1,4 @@
-import { createApp } from "../src/app/app";
+import createApp from "../src/app.js";
 import { type VercelRequest, type VercelResponse } from "@vercel/node";
 import { IncomingMessage, ServerResponse, type RequestListener } from "http";
 
