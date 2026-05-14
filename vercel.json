@@ -3,7 +3,7 @@
   "builds": [
     {
       "build": "pnpm run build",
-      "src": "dist/index.js",
+      "src": "dist/src/server.js",
       "use": "@vercel/node",
       "config": { "includeFiles": ["dist/**"] }
     }
