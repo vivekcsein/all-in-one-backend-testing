@@ -2,7 +2,7 @@
   "name": "all-in-one-backend-testing",
   "version": "1.0.0",
   "description": "testing out an all-in-one backend setup with express and vercel",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
