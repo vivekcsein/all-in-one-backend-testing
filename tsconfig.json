@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2025",
-    "module": "preserve",
+    "module": "es2022",
     "moduleResolution": "bundler",
     "lib": ["es2021"],
     "allowSyntheticDefaultImports": true,
@@ -14,7 +14,7 @@
     "declaration": false,
     "outDir": "./dist",
     "rootDir": "./",
-    "types": ["node"],
+    "types": ["node","express"],
     "typeRoots": ["./node_modules/@types"]
   },
   "include": ["api", "src/**/*.ts"],
