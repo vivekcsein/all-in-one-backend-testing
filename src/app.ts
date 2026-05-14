@@ -1,8 +1,7 @@
-import express, { Request, Response } from "express";
+import express, { type Request, type Response } from "express";
 
 const createApp = async (): Promise<express.Express> => {
   const app = express();
-  // app.set("trust proxy", 1);
 
   // 🛣️ Routes
   app.get(["/", "/index", "/index.html"], (_req: Request, res: Response) => {
