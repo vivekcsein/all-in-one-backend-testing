@@ -10,7 +10,7 @@ const createApp = async (): Promise<express.Express> => {
       success: true,
       message: "Hello World!",
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV,
+      environment: process.env?.["NODE_ENV"],
     });
   });
 
@@ -20,7 +20,7 @@ const createApp = async (): Promise<express.Express> => {
       success: true,
       message: "Server is healthy",
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV,
+      environment: process.env?.["NODE_ENV"],
     });
   });
 

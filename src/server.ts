@@ -5,7 +5,7 @@ const startServer = async (): Promise<void> => {
   try {
     const app = await createApp();
 
-    const APP_PORT = process.env.PORT || 4000;
+    const APP_PORT = process.env?.["PORT"] || 4000;
 
     const server = app.listen(APP_PORT, () => {
       console.log(`🚀 Server running on port http://localhost:${APP_PORT}`);

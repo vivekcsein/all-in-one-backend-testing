@@ -1,38 +1,54 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    /* ─── Strict Type Safety ──────────────────────────────────────── */
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "useUnknownInCatchVariables": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": true,
+
+    /* ─── Target & Module ─────────────────────────────────────────── */
+    /* CommonJS output (Node.js / Vercel serverless compatible)       */
+    /* moduleResolution "bundler" is the forward-compatible upgrade   */
+    /* path for CommonJS — Node10 is deprecated in TS 6.0 and will   */
+    /* error in TS 7.0. TS PR #62320 explicitly allows this pair.     */
     "target": "ES2022",
+    "module": "CommonJS",
+    "moduleResolution": "bundler",
     "lib": ["ES2022"],
 
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "verbatimModuleSyntax": false,
-    "rewriteRelativeImportExtensions": true,
-
+    /* ─── Emit ────────────────────────────────────────────────────── */
+    "outDir": "dist",
     "rootDir": "./",
-    "outDir": "./dist",
-    "sourceMap": true,
     "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "removeComments": false,
 
-    "allowSyntheticDefaultImports": true,
+    /* ─── Interop ─────────────────────────────────────────────────── */
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-
-    "strict": true,
-    "strictNullChecks": true,
-    "noUncheckedIndexedAccess": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
 
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    /* ─── Path Aliases ────────────────────────────────────────────── */
+    /* tsc emits alias strings as-is into .js — tsc-alias rewrites    */
+    /* them to relative paths post-compile so Node.js can resolve.    */
 
+    /* ─── Performance ─────────────────────────────────────────────── */
     "skipLibCheck": true,
-
-    "types": ["node", "express"]
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
-
-  "include": ["src/**/*.ts", "api/**/*.ts"],
-
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "api/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts"]
 }
