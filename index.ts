@@ -7,6 +7,10 @@ app.get('/', async (c) => {
   return c.text('Hello World!');
 });
 
+app.get('/health', async (c) => {
+  return c.json({ status: 'ok' });
+});
+
 const handler = handle(app);
 
 export const GET = handler;
