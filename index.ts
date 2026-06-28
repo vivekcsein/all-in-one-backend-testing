@@ -1,10 +1,16 @@
+import type { VercelRequest } from '@vercel/node'
 import createApp from './src/app/app'
-import { handle } from 'hono/vercel'
 
-export const config = {
-  runtime: 'edge',
+let cachedApp: Awaited<ReturnType<typeof createApp>> | null = null
+
+async function getApp() {
+  if (!cachedApp) {
+    cachedApp = await createApp()
+  }
+  return cachedApp
 }
 
-const app = await createApp()
-
-export default handle(app);
+export default async function handler(req: VercelRequest) {
+  const app = await getApp()
+  return app.fetch(req as unknown as Request)
+}
