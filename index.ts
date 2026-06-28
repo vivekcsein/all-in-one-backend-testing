@@ -1,6 +1,6 @@
 import type { Hono } from 'hono';
 import { handle } from 'hono/vercel';
-import createApp from '@/app/app';
+import createApp from "./src/app/app";
 
 const app = createApp();
 const handler = handle(app as unknown as Hono);
