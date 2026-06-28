@@ -4,12 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run index.ts",
-    "start": "bun run index.ts",
-    "lint": "bun run lint",
-    "format": "bun run format",
-    "clean": "bun run clean",
-    "test": "bun run test"
+    "dev": "bun run src/app/server.ts",
+    "build": "bun build index.ts --outdir dist",
+    "start": "bun run dist/index.js"
   },
   "dependencies": {
     "hono": "^4.12.27"
