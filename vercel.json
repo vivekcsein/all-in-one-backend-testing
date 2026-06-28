@@ -3,36 +3,33 @@
   "version": 2,
   "framework": "hono",
   "installCommand": "bun install --frozen-lockfile",
-  "buildCommand": "bun run vercel-build",
+  "buildCommand":   "bun run vercel-build",
   "outputDirectory": "dist",
   "functions": {
     "src/index.ts": {
-      "maxDuration": 30,
-      "memory": 512
+      "runtime":     "nodejs22",
+      "maxDuration": 30
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/src/index.ts" }],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/src/index.ts" }
+  ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
+        { "key": "Access-Control-Allow-Origin",  "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
+        { "key": "X-Content-Type-Options",       "value": "nosniff" },
+        { "key": "X-Frame-Options",              "value": "DENY" }
       ]
     }
   ],
   "env": {
     "NODE_ENV": "production"
   },
+  "regions":      ["iad1"],
   "trailingSlash": false,
-  "cleanUrls": true
+  "cleanUrls":     true
 }

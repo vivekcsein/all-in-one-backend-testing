@@ -35,7 +35,6 @@ app.notFound((c) => err(c, `Route ${c.req.path} not found`, 404))
 
 // ─── Error handler ───────────────────────────────────────────────────────────
 app.onError((error, c) => {
-  // console.log(`[ERROR] ${error.message}`, error.stack)
   return err(c, 'Internal Server Error', 500)
 })
 

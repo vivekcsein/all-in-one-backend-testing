@@ -20,7 +20,7 @@
     /* CommonJS + bundler: the forward-safe pair now  */
     /* that Node10 is deprecated in TS 6.0 (PR#62200) */
     "target": "ES2022",
-    "module": "ES2022",
+    "module": "preserve",
     "moduleResolution": "bundler",
     "lib": ["ES2022"],
 
