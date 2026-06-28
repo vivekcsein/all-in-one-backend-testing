@@ -1,16 +1,16 @@
-import type { VercelRequest } from '@vercel/node'
+// index.ts — async factory pattern for Vercel (no top-level await)
 import createApp from './src/app/app'
 
-let cachedApp: Awaited<ReturnType<typeof createApp>> | null = null
+let _app: Awaited<ReturnType<typeof createApp>>
 
-async function getApp() {
-  if (!cachedApp) {
-    cachedApp = await createApp()
-  }
-  return cachedApp
+const getApp = async () => {
+  if (!_app) _app = await createApp()
+  return _app
 }
 
-export default async function handler(req: VercelRequest) {
-  const app = await getApp()
-  return app.fetch(req as unknown as Request)
+export default {
+  fetch: async (req: Request) => {
+    const app = await getApp()
+    return app.fetch(req)
+  },
 }
