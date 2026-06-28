@@ -1,6 +1,6 @@
 {
   "name": "all-in-one-backend-testing",
-  "module": "index.ts",
+  "main": "index.ts",
   "type": "module",
   "private": true,
   "scripts": {
