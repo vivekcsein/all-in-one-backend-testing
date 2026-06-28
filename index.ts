@@ -1,18 +1,9 @@
-import { Hono } from 'hono';
+import type { Hono } from 'hono';
 import { handle } from 'hono/vercel';
+import createApp from '@/app/app';
 
-const app = new Hono().basePath('/api');
-
-app.get('/', async (c) => {
-  return c.text('Hello World!');
-});
-
-app.get('/health', async (c) => {
-  return c.json({ status: 'ok' });
-});
-
-const handler = handle(app);
-
+const app = createApp();
+const handler = handle(app as unknown as Hono);
 export const GET = handler;
 export const POST = handler;
 export const PATCH = handler;
