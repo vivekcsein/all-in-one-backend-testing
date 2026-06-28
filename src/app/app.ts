@@ -4,7 +4,7 @@ import { Hono } from "hono";
 // import { requestId } from "hono/request-id";
 // import { secureHeaders } from "hono/secure-headers";
 
-const createApp = async () => {
+const createApp = async (): Promise<Hono> => {
 
   // ── Hono app ───────────────────────────────────────────────────────────────────
   const app = new Hono();
