@@ -1,5 +1,0 @@
-[install]
-frozen = true
-
-[test]
-coverage = true

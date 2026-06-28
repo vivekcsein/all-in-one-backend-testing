@@ -1,81 +1,17 @@
-# hono-vercel-server
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fhono-vercel-ai-sdk&env=OPENAI_API_KEY&envDescription=Find%20your%20API%20key&envLink=https%3A%2F%2Fvercel.com%2Fdocs%2Fintegrations%2Fai%2Fopenai%23getting-your-openai-api-key)
 
-A production-ready **Hono + TypeScript** backend deployed on Vercel with zero-configuration.
+# Hono with the Vercel AI SDK
 
-## Stack
+This example shows how to use the [Vercel AI SDK](https://sdk.vercel.ai/docs/introduction) with [Hono](https://hono.dev/) to stream a response back from OpenAI.
 
-| Layer         | Choice                        |
-|---------------|-------------------------------|
-| Framework     | Hono v4                       |
-| Language      | TypeScript 5.8 (strict)       |
-| Runtime       | Bun (dev) / Node.js 20 (prod) |
-| Deploy        | Vercel (zero-config)          |
-| Validation    | Zod                           |
-| Path aliases  | tsc-alias (post-compile)      |
+Forked from the [Vercel + Hono starter template](https://vercel.com/templates/hono/hono-on-vercel).
 
-## Quick start
+## Getting Started
 
 ```bash
-# Install
-bun install
-
-# Dev (requires Vercel CLI)
-bun run dev
-
-# Type check
-bun run type-check
-
-# Build
-bun run build
+$ git clone https://github.com/leerob/hono-vercel-ai-sdk.git
+$ cd hono-vercel-ai-sdk
+$ bun i -g vercel
+$ bun i
+$ vercel dev
 ```
-
-## Deploy
-
-```bash
-# Install Vercel CLI once
-bun add -g vercel
-
-# First deploy
-vercel
-
-# Subsequent deploys
-vercel --prod
-```
-
-## Project structure
-
-```
-src/
-├── app/
-│   └── api/
-│       ├── health.route.ts      # GET /health
-│       └── health.service.ts    # Business logic
-├── packages/
-│   ├── env/
-│   │   └── app.env.ts           # Zod-validated env
-│   ├── schemas/
-│   │   └── health.schema.ts     # Zod response types
-│   └── utils/
-│       └── response.ts          # ok() / err() helpers
-├── types/
-│   └── global.d.ts              # Hono context variable types
-└── index.ts                     # App entry — default export for Vercel
-```
-
-## Path aliases
-
-All aliases resolve at compile time via **tsc-alias** (zero runtime cost):
-
-| Alias          | Resolves to   |
-|----------------|---------------|
-| `@/*`          | `src/*`       |
-| `@app/*`       | `src/app/*`   |
-| `@packages/*`  | `src/packages/*` |
-| `@types/*`     | `src/types/*` |
-
-## Adding a new route
-
-1. Create `src/packages/schemas/[resource].schema.ts` — Zod schema
-2. Create `src/app/api/[resource].service.ts` — business logic
-3. Create `src/app/api/[resource].route.ts` — Hono router
-4. Register in `src/index.ts`: `app.route('/resource', resourceRoute)`

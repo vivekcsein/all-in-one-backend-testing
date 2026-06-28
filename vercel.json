@@ -1,39 +1,15 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "version": 2,
-  "framework": "hono",
-  "installCommand": "bun install --frozen-lockfile",
-  "buildCommand": "bun run vercel-build",
-  "outputDirectory": "dist",
-  "functions": {
-    "src/index.ts": {
-      "runtime": "vercel-node@2.10.2",
-      "maxDuration": 30
-    }
-  },
-  "rewrites": [{ "source": "/(.*)", "destination": "/src/index.ts" }],
-  "headers": [
+  "redirects": [
     {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type, Authorization"
-        },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
-      ]
+      "source": "/",
+      "destination": "/api",
+      "statusCode": 301
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "regions": ["iad1"],
-  "trailingSlash": false,
-  "cleanUrls": true
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api"
+    }
+  ]
 }
