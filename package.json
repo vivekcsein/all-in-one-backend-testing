@@ -1,0 +1,24 @@
+{
+  "name": "all-in-one-backend-testing",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run index.ts",
+    "build": "bun run build",
+    "start": "bun run index.ts",
+    "lint": "bun run lint",
+    "format": "bun run format",
+    "clean": "bun run clean",
+    "test": "bun run test"
+  },
+  "dependencies": {
+    "hono": "^4.12.27"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
