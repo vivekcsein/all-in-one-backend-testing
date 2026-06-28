@@ -1,7 +1,0 @@
-{
-  "type": "module",
-  "main": "./api/index.ts",
-  "dependencies": {
-    "hono": "^4.4.2"
-  }
-}
