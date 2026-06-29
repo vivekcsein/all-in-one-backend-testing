@@ -1,53 +1,56 @@
 {
   // ─────────────────────────────────────────────────────────────
   // @vivekcsein | Hono × Vercel × Bun Backend tsconfig
-  // Stack: Hono · Vercel Edge/Node · Bun · Axios · Zod · No React
+  // Stack: Hono · Vercel Edge/Node · Bun · Zod · No React
+  // Fix: NodeNext → bundler moduleResolution (no .js extensions)
   // ─────────────────────────────────────────────────────────────
   "compilerOptions": {
     // ── Target & Runtime Libs ──────────────────────────────────
-    "target": "ES2022", // Stable target; fully supported by Bun + Node 18+
-    "lib": ["ES2022"], // NO DOM — this is a pure backend. No window/document
-    "module": "NodeNext", // Best for Bun/Node dual compatibility + Vercel edge
-    "moduleDetection": "force", // Every file is a module — no accidental global scope
-    "moduleResolution": "NodeNext", // Resolves .js/.ts extensions correctly for Hono + Bun
+    "target": "ES2022",
+    "lib": ["ES2022"], // Pure backend — NO DOM
+    "module": "Preserve", // Let Bun/esbuild own the module format
+    "moduleDetection": "force",
+    "moduleResolution": "bundler", // FIX: no forced .js extensions, works with Bun + Vercel
 
     // ── Emit ──────────────────────────────────────────────────
-    "outDir": "./dist", // Compiled output for Vercel build / Node deployment
-    "rootDir": "./", // Source root — keeps dist clean
-    "noEmit": false, // Backend MUST emit — Vercel needs compiled JS
-    "sourceMap": true, // Source maps for Vercel runtime error tracing
-    "declaration": true, // .d.ts for internal packages / monorepo consumers
-    "declarationMap": true, // IDE go-to-source across packages
-    "incremental": true, // tsbuildinfo cache — faster builds on Vercel CI
-    "tsBuildInfoFile": "./.tsbuildinfo", // Explicit path — commit to .gitignore
+    "outDir": "./dist",
+    "rootDir": "./",
+    "noEmit": false,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo",
 
     // ── Module Interop ─────────────────────────────────────────
-    "esModuleInterop": true, // Axios + CJS package interop
-    "allowSyntheticDefaultImports": true, // Paired with esModuleInterop
-    "resolveJsonModule": true, // import pkg from './package.json'
-    "allowJs": false, // Pure TypeScript — no .js bleed-in
-    "verbatimModuleSyntax": true, // Enforces `import type` — tree-shaking safe
-    "isolatedModules": true, // Each file transpilable alone — Bun/SWC compatible
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": false,
+    "verbatimModuleSyntax": true, // Still enforces `import type` — tree-shaking safe
+    "isolatedModules": true,
+    "rewriteRelativeImportExtensions": true,
+    "allowImportingTsExtensions": true, // import './foo.ts' works in Bun natively
 
     // ── Strict Type Safety ─────────────────────────────────────
-    "strict": true, // Umbrella: enables all strict sub-flags
-    "strictNullChecks": true, // Explicit (redundant but self-documenting)
-    "noImplicitAny": true, // No silent `any` — use `unknown` + narrowing
-    "exactOptionalPropertyTypes": true, // { x?: string } ≠ { x: string | undefined }
-    "noUncheckedIndexedAccess": true, // arr[0] → T | undefined — catches edge bugs
-    "noImplicitOverride": true, // Require `override` keyword on class methods
-    "noImplicitReturns": true, // All code paths must return
-    "noFallthroughCasesInSwitch": true, // No accidental switch fallthrough
-    "useUnknownInCatchVariables": true, // catch(e) → e is `unknown`, never `any`
-    "skipLibCheck": true, // Skip .d.ts checks in node_modules
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "useUnknownInCatchVariables": true,
+    "skipLibCheck": true,
 
-    // ── Intentionally Disabled (ESLint owns these) ─────────────
-    "noUnusedLocals": false, // @typescript-eslint/no-unused-vars handles this
-    "noUnusedParameters": false, // Same — ESLint owns it
-    "noPropertyAccessFromIndexSignature": false, // Too noisy for Hono ctx.req.param()
+    // ── Disabled (ESLint owns these) ───────────────────────────
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noPropertyAccessFromIndexSignature": false,
 
     // ── Type Roots ─────────────────────────────────────────────
-    "types": ["node", "bun-types"], // Node + Bun globals — no @types/react here
+    "types": ["node", "bun-types"],
 
     // ── Path Aliases ───────────────────────────────────────────
     "paths": {
@@ -63,18 +66,14 @@
     }
   },
 
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.d.ts", // Ambient type declarations
-    "index.ts"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "index.ts"], // Ambient type declarations
 
   "exclude": [
     "node_modules",
     "dist",
-    ".vercel", // Vercel build output
-    "coverage", // Bun test / Vitest coverage
-    "**/*.test.ts", // Tests excluded from build emit
+    ".vercel",
+    "coverage",
+    "**/*.test.ts",
     "**/*.spec.ts"
   ]
 }
