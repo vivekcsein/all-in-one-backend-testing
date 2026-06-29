@@ -1,0 +1,16 @@
+{
+  "name": "all-in-one-backend-testing",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "^1.3.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@vercel/hono": "^0.2.101",
+    "hono": "^4.12.27"
+  }
+}
