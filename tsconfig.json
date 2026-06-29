@@ -1,79 +1,65 @@
 {
-  // ─────────────────────────────────────────────────────────────
-  // @vivekcsein | Hono × Vercel × Bun Backend tsconfig
-  // Stack: Hono · Vercel Edge/Node · Bun · Zod · No React
-  // Fix: NodeNext → bundler moduleResolution (no .js extensions)
-  // ─────────────────────────────────────────────────────────────
   "compilerOptions": {
-    // ── Target & Runtime Libs ──────────────────────────────────
-    "target": "ES2022",
-    "lib": ["ES2022"], // Pure backend — NO DOM
-    "module": "Preserve", // Let Bun/esbuild own the module format
+    // ── Core ──────────────────────────────────────────────────
+    // ESNext = no downcompile, Bun runs it natively
+    // Preserve = let Bun/Next.js bundler own the module format
+    // bundler = no forced .js extensions on imports (bare imports just work)
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "Preserve",
     "moduleDetection": "force",
-    "moduleResolution": "bundler", // FIX: no forced .js extensions, works with Bun + Vercel
+    "moduleResolution": "bundler",
 
     // ── Emit ──────────────────────────────────────────────────
-    "outDir": "./dist",
-    "rootDir": "./",
-    "noEmit": false,
+    // noEmit = TS only type-checks, Bun/Next.js handles transpile
+    // declaration = .d.ts output for monorepo/package consumers
+    "noEmit": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
     "incremental": true,
-    "tsBuildInfoFile": "./.tsbuildinfo",
 
-    // ── Module Interop ─────────────────────────────────────────
+    // ── Imports ───────────────────────────────────────────────
+    // verbatimModuleSyntax = enforces `import type` — zero runtime cost
+    // isolatedModules = each file transpilable alone (required by Bun/SWC)
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
     "allowJs": false,
-    "verbatimModuleSyntax": true, // Still enforces `import type` — tree-shaking safe
-    "isolatedModules": true,
-    "rewriteRelativeImportExtensions": true,
-    "allowImportingTsExtensions": true, // import './foo.ts' works in Bun natively
 
-    // ── Strict Type Safety ─────────────────────────────────────
+    // ── Strict ────────────────────────────────────────────────
+    // strict = master switch for 8 sub-flags
+    // noUncheckedIndexedAccess = arr[0] → T | undefined (not T), catches real bugs
+    // useUnknownInCatchVariables = catch(e) → e is unknown, never any
+    // exactOptionalPropertyTypes = { x?: string } ≠ { x: string | undefined }
     "strict": true,
-    "strictNullChecks": true,
-    "noImplicitAny": true,
-    "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
+    "useUnknownInCatchVariables": true,
+    "exactOptionalPropertyTypes": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "useUnknownInCatchVariables": true,
     "skipLibCheck": true,
 
-    // ── Disabled (ESLint owns these) ───────────────────────────
+    // ── Off (ESLint owns these) ────────────────────────────────
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false,
 
-    // ── Type Roots ─────────────────────────────────────────────
+    // ── Paths ─────────────────────────────────────────────────
+    "rootDir": "./",
     "types": ["node", "bun-types"],
-
-    // ── Path Aliases ───────────────────────────────────────────
     "paths": {
       "@/*": ["./src/*"],
-      "@routes/*": ["./src/routes/*"],
-      "@handlers/*": ["./src/handlers/*"],
-      "@middleware/*": ["./src/middleware/*"],
-      "@services/*": ["./src/services/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@schemas/*": ["./src/schemas/*"],
-      "@types/*": ["./src/types/*"],
-      "@config/*": ["./src/config/*"]
+      "@packages/*": ["./src/packages/*"],
+      "@types/*": ["./src/types/*"]
     }
   },
 
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "index.ts"], // Ambient type declarations
-
-  "exclude": [
-    "node_modules",
-    "dist",
-    ".vercel",
-    "coverage",
-    "**/*.test.ts",
-    "**/*.spec.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "index.ts"],
+  "exclude": ["node_modules", "dist", ".next", "coverage"]
 }
